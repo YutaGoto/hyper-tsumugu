@@ -27,14 +27,14 @@ jobs:
           command: yarn build
       - run:
           name: create dir
-          command: mkdir /project/artifacts
+          command: mkdir ~/project/artifacts
       - run:
           name: move files
           command: |
-            mv package-prd.json /project/artifacts/package.json
-            mv index.js /project/artifacts/index.js
+            cp package-prd.json ~/project/artifacts/package.json
+            mv index.js ~/project/artifacts/index.js
       - store_artifacts:
-          path: /projext/artifacts
+          path: ~/project/artifacts
 
 workflows:
   main:
