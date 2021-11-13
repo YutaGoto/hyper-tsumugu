@@ -68,7 +68,7 @@ jobs:
                       "emoji": true
                     },
                     "value": "click0",
-                    "url": "${ARTIFACT0}",
+                    "url": ${ARTIFACT0},
                     "action_id": "button-action"
                   }
                 },
@@ -86,7 +86,7 @@ jobs:
                       "emoji": true
                     },
                     "value": "click1",
-                    "url": "${ARTIFACT1}",
+                    "url": ${ARTIFACT1},
                     "action_id": "button-action"
                   }
                 }
