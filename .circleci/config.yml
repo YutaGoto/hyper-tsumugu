@@ -1,22 +1,90 @@
-# This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
 version: 2.1
 
-# Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
-# See: https://circleci.com/docs/2.0/orb-intro/
 orbs:
   node: circleci/node@4.7
+  slack: circleci/slack@4.4.2
+  jq: circleci/jq@2.2.0
 
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+jobs:
+  build:
+    docker:
+      - image: cimg/node:16.13
+    working_directory: ~/project
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --immutable
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
+      - run:
+          name: build
+          command: yarn build
+      - run:
+          name: create dir
+          command: mkdir ~/project/artifacts
+      - run:
+          name: move files
+          command: |
+            cp package-prd.json ~/project/artifacts/package.json
+            mv index.js ~/project/artifacts/index.js
+      - store_artifacts:
+          path: ~/project/artifacts
+      - jq/install
+      - run:
+          name: Get artifacts
+          command: |
+            artifacts=$(curl -X GET "https://circleci.com/api/v2/project/github/YutaGoto/hyper-tsumugu/$CIRCLE_BUILD_NUM/artifacts" \
+            -H "Accept: application/json" \
+            --header "Circle-Token: $CIRCLE_TOKEN")
+            artifact0=$(echo $artifacts | jq '.items[0].url')
+            artifact1=$(echo $artifacts | jq '.items[1].url')
+            echo "export ARTIFACT0=$artifact0" >> $BASH_ENV 
+            echo "export ARTIFACT1=$artifact1" >> $BASH_ENV
+      - slack/notify:
+          event: always
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Hyper-Tsumugu Artifacts <${ARTIFACT0}|index.js>"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Hyper-Tsumugu Artifacts <${ARTIFACT1}|package.json>"
+                  }
+                }
+              ]
+            }
+
+
 workflows:
-  main: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
+  main:
     jobs:
       - node/run:
-          # This is the node version to use for the `cimg/node` tag
-          # Relevant tags can be found on the CircleCI Developer Hub
-          # https://circleci.com/developer/images/image/cimg/node
-          version: '16.10'
-          # If you are using yarn, change the line below from "npm" to "yarn"
+          version: "16.13"
           pkg-manager: yarn
           yarn-run: lint
+      - build:
+          requires:
+            - "node/run"
+          context:
+            - slack
+          filters:
+            branches:
+              only:
+                - main
