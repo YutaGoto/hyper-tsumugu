@@ -45,12 +45,13 @@ jobs:
             artifacts=$(curl -X GET "https://circleci.com/api/v2/project/api/v2/project/github/YutaGoto/$CIRCLE_BUILD_NUM/artifacts" \
             -H "Accept: application/json" \
             --header "Circle-Token: $CIRCLE_TOKEN")
+            echo $artifacts
             artifact0=$(echo $artifacts | jq '.items[0].url')
             artifact1=$(echo $artifacts | jq '.items[1].url')
             echo "export ARTIFACT0=$artifact0" >> $BASH_ENV 
             echo "export ARTIFACT1=$artifact1" >> $BASH_ENV
       - run:
-          command: echo ${ARTIFACT1}
+          command: echo "${ARTIFACT1}"
       - slack/notify:
           event: always
           custom: |
