@@ -2,6 +2,8 @@ version: 2.1
 
 orbs:
   node: circleci/node@4.7
+  slack: circleci/slack@4.4.2
+  jq: circleci/jq@2.2.0
 
 jobs:
   build:
@@ -36,6 +38,61 @@ jobs:
             mv index.js ~/project/artifacts/index.js
       - store_artifacts:
           path: ~/project/artifacts
+      - jq/install
+      - run:
+          name: Get artifacts
+          command: |
+            artifacts=$(curl -X GET "https://circleci.com/api/v2/project/api/v2/project/github/YutaGoto/$CIRCLE_BUILD_NUM/artifacts" \
+            -H "Accept: application/json" \
+            --header "Circle-Token: $CIRCLE_TOKEN")
+            artifact0=$(echo $artifacts | jq '.items[0].url')
+            artifact1=$(echo $artifacts | jq '.items[1].url')
+            echo "export ARTIFACT0=$artifact0" >> $BASH_ENV 
+            echo "export ARTIFACT1=$artifact1" >> $BASH_ENV
+      - slack/notify:
+          event: always
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Hyper-Tsumugu Artifacts index.js"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "index.js",
+                      "emoji": true
+                    },
+                    "value": "click0",
+                    "url": "${ARTIFACT0}",
+                    "action_id": "button-action"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Hyper-Tsumugu Artifacts package.json"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "package.json",
+                      "emoji": true
+                    },
+                    "value": "click1",
+                    "url": "${ARTIFACT1}",
+                    "action_id": "button-action"
+                  }
+                }
+              ]
+            }
+
 
 workflows:
   main:
@@ -47,3 +104,5 @@ workflows:
       - build:
           requires:
             - "node/run"
+          context:
+            - slack
