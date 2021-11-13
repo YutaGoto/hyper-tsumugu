@@ -84,3 +84,7 @@ workflows:
             - "node/run"
           context:
             - slack
+          filters:
+            branches:
+              only:
+                - main
