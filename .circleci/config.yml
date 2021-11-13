@@ -49,6 +49,8 @@ jobs:
             artifact1=$(echo $artifacts | jq '.items[1].url')
             echo "export ARTIFACT0=$artifact0" >> $BASH_ENV 
             echo "export ARTIFACT1=$artifact1" >> $BASH_ENV
+      - run:
+          command: echo ${ARTIFACT1}
       - slack/notify:
           event: always
           custom: |
@@ -68,7 +70,7 @@ jobs:
                       "emoji": true
                     },
                     "value": "click0",
-                    "url": ${ARTIFACT0},
+                    "url": "${ARTIFACT0}",
                     "action_id": "button-action"
                   }
                 },
@@ -86,7 +88,7 @@ jobs:
                       "emoji": true
                     },
                     "value": "click1",
-                    "url": ${ARTIFACT1},
+                    "url": "${ARTIFACT1}",
                     "action_id": "button-action"
                   }
                 }
