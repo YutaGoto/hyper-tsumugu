@@ -45,13 +45,10 @@ jobs:
             artifacts=$(curl -X GET "https://circleci.com/api/v2/project/github/YutaGoto/hyper-tsumugu/$CIRCLE_BUILD_NUM/artifacts" \
             -H "Accept: application/json" \
             --header "Circle-Token: $CIRCLE_TOKEN")
-            echo $artifacts
             artifact0=$(echo $artifacts | jq '.items[0].url')
             artifact1=$(echo $artifacts | jq '.items[1].url')
             echo "export ARTIFACT0=$artifact0" >> $BASH_ENV 
             echo "export ARTIFACT1=$artifact1" >> $BASH_ENV
-      - run:
-          command: echo "${ARTIFACT1}"
       - slack/notify:
           event: always
           custom: |
@@ -61,36 +58,14 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "Hyper-Tsumugu Artifacts index.js"
-                  },
-                  "accessory": {
-                    "type": "button",
-                    "text": {
-                      "type": "plain_text",
-                      "text": "index.js",
-                      "emoji": true
-                    },
-                    "value": "click0",
-                    "url": "${ARTIFACT0}",
-                    "action_id": "button-action"
+                    "text": "Hyper-Tsumugu Artifacts <${ARTIFACT0}|index.js>"
                   }
                 },
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "Hyper-Tsumugu Artifacts package.json"
-                  },
-                  "accessory": {
-                    "type": "button",
-                    "text": {
-                      "type": "plain_text",
-                      "text": "package.json",
-                      "emoji": true
-                    },
-                    "value": "click1",
-                    "url": "${ARTIFACT1}",
-                    "action_id": "button-action"
+                    "text": "Hyper-Tsumugu Artifacts <${ARTIFACT1}|package.json>"
                   }
                 }
               ]
