@@ -42,7 +42,7 @@ jobs:
       - run:
           name: Get artifacts
           command: |
-            artifacts=$(curl -X GET "https://circleci.com/api/v2/project/api/v2/project/github/YutaGoto/$CIRCLE_BUILD_NUM/artifacts" \
+            artifacts=$(curl -X GET "https://circleci.com/api/v2/project/github/YutaGoto/hyper-tsumugu/$CIRCLE_BUILD_NUM/artifacts" \
             -H "Accept: application/json" \
             --header "Circle-Token: $CIRCLE_TOKEN")
             echo $artifacts
