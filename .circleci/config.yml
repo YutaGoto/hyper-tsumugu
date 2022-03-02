@@ -75,14 +75,19 @@ workflows:
   main:
     jobs:
       - node/run:
+          name: lint
           version: "16.13"
           pkg-manager: yarn
-          yarn-run:
-            - lint
-            - typecheck
+          yarn-run: lint
+      - node/run:
+          name: type-check
+          version: "16.13"
+          pkg-manager: yarn
+          yarn-run: type-check
       - build:
           requires:
-            - "node/run"
+            - lint
+            - type-check
           context:
             - slack
           filters:
