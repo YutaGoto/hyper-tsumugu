@@ -7,7 +7,8 @@
     "precommit": "lint-staged",
     "lint": "eslint src/**/*.ts",
     "format": "eslint --fix src/**/*.ts && prettier --write src/**/*.ts",
-    "build": "webpack"
+    "build": "webpack",
+    "type-check": "tsc"
   },
   "repository": "https://github.com/yutagoto/hyper-tsumugu.git",
   "author": "yutagoto <you.goto.510@gmail.com>",

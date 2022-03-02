@@ -9,7 +9,8 @@ import {
 import { termCSS, css } from './stylesheets'
 import { Options } from './Types'
 
-exports.decorateConfig = (config) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+exports.decorateConfig = (config: any) => {
   const options: Options = Object.assign({}, {
     illust: true,
     opacity: 0.3,
