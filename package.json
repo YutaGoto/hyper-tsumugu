@@ -6,7 +6,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "lint": "eslint src/**/*.ts",
-    "format": "eslint --fix src/**/*.ts && prettier --write src/**/*.ts",
+    "format": "prettier --write src/**/*.ts",
     "build": "webpack",
     "type-check": "tsc"
   },

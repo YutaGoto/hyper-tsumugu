@@ -1,4 +1,4 @@
 export interface Options {
-  illust: boolean
-  opacity: number
+  illust: boolean;
+  opacity: number;
 }
