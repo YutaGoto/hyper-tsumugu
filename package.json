@@ -13,8 +13,8 @@
   "repository": "https://github.com/yutagoto/hyper-tsumugu.git",
   "author": "yutagoto <you.goto.510@gmail.com>",
   "devDependencies": {
-    "@babel/core": "^7.17.9",
-    "@babel/preset-env": "^7.16.11",
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
     "@babel/preset-typescript": "^7.16.7",
     "@typescript-eslint/eslint-plugin": "^5.19.0",
     "@typescript-eslint/parser": "^5.19.0",
