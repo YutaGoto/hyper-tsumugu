@@ -1,8 +1,7 @@
 import illust from "../images/tsumugu.svg";
 import { Options } from "../Types";
 
-export default (options: Options): string => {
-  return `
+export default (options: Options): string => `
     .terms_terms:before {
       content: "";
       display: ${options.illust ? "block" : "none"};
@@ -22,4 +21,3 @@ export default (options: Options): string => {
       background-color: rgba(0,0,0,0) !impotant;
     }
   `;
-};

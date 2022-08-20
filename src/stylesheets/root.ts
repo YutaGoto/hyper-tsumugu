@@ -1,10 +1,7 @@
 import { backgroundColor } from "../colors";
-import { Options } from "../Types";
 
-export default (options: Options): string => {
-  return `
+export default (): string => `
     .hyper_main {
       background-color: ${backgroundColor};
     }
   `;
-};

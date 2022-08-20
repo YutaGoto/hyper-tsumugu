@@ -1,16 +1,12 @@
+import { Options } from "../Types";
 import root from "./root";
 import header from "./header";
 import term from "./term";
-import { Options } from "../Types";
 
-export const termCSS = (): string => {
-  return "";
-};
+export const termCss = (): string => "";
 
-export const css = (options: Options): string => {
-  return `
-    ${root(options)}
+export const css = (options: Options): string => `
+    ${root()}
     ${header()}
     ${term(options)}
   `;
-};

@@ -1,7 +1,6 @@
 import { backgroundColor, colors } from "../colors/index";
 
-export default (): string => {
-  return `
+export default (): string => `
     .header_header {
       background-color: rgba(255, 255, 255, 0.08);
     }
@@ -81,4 +80,3 @@ export default (): string => {
       transform: scale(1);
     }
   `;
-};

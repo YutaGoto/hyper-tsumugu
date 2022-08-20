@@ -1,0 +1,15 @@
+{
+  "space": true,
+  "rules": {
+    "quotes": ["error", "double"],
+    "arrow-body-style": ["error", "as-needed"],
+    "import/extensions": ["error", "never"],
+    "unicorn/filename-case": "off",
+    "unicorn/prefer-module": "off",
+    "@typescript-eslint/quotes": ["warn", "double"],
+    "@typescript-eslint/object-curly-spacing": ["error", "always"],
+    "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
+    "@typescript-eslint/restrict-template-expressions": "off"
+  },
+  "ignores": ["index.js", "src/index.d.ts"]
+}
