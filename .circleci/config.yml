@@ -8,7 +8,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/node:16.13
+      - image: cimg/node:18.7
     working_directory: ~/project
     steps:
       - checkout
@@ -76,12 +76,12 @@ workflows:
     jobs:
       - node/run:
           name: lint
-          version: "16.13"
+          version: "18.7"
           pkg-manager: yarn
           yarn-run: lint
       - node/run:
           name: type-check
-          version: "16.13"
+          version: "18.7"
           pkg-manager: yarn
           yarn-run: type-check
       - build:
