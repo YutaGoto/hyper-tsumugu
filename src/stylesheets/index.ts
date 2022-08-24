@@ -6,7 +6,7 @@ import term from "./term";
 export const termCss = (): string => "";
 
 export const css = (options: Options): string => `
-    ${root()}
-    ${header()}
+    ${root}
+    ${header}
     ${term(options)}
   `;

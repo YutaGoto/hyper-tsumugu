@@ -1,7 +1,9 @@
 import { backgroundColor } from "../colors";
 
-export default (): string => `
+const root = `
     .hyper_main {
       background-color: ${backgroundColor};
     }
   `;
+
+export default root;

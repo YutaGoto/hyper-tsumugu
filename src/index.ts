@@ -26,8 +26,8 @@ exports.decorateConfig = (config: any) => {
     selectionColor,
     colors,
     cursorColor,
-    termCSS: `
-      ${config.termCSS || ""}
+    termCss: `
+      ${config.termCss || ""}
     `,
     css: `
       ${config.css || ""}
