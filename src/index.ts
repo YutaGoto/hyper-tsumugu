@@ -7,7 +7,7 @@ import {
   cursorColor,
 } from "./colors";
 import { termCss, css } from "./stylesheets";
-import { Options } from "./Types";
+import type { Options } from "./Types";
 
 exports.decorateConfig = (config: any) => {
   const options: Options = Object.assign(

@@ -1,5 +1,5 @@
 import illust from "../images/tsumugu.svg";
-import { Options } from "../Types";
+import type { Options } from "../Types";
 
 const term = (options: Options): string => `
     .terms_terms:before {

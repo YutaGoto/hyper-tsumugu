@@ -1,4 +1,4 @@
-import { Options } from "../Types";
+import type { Options } from "../Types";
 import root from "./root";
 import header from "./header";
 import term from "./term";
