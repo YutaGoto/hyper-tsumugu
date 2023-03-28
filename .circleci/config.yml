@@ -1,8 +1,8 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@4.7
-  slack: circleci/slack@4.4.2
+  node: circleci/node@5.1.0
+  slack: circleci/slack@4.12.1
   jq: circleci/jq@2.2.0
 
 jobs:
@@ -36,6 +36,7 @@ jobs:
           command: |
             cp package-prd.json ~/project/artifacts/package.json
             mv index.js ~/project/artifacts/index.js
+            mv tsumuguFace.js ~/project/artifacts/tsumuguFace.js
       - store_artifacts:
           path: ~/project/artifacts
       - jq/install
@@ -47,8 +48,10 @@ jobs:
             --header "Circle-Token: $CIRCLE_TOKEN")
             artifact0=$(echo $artifacts | jq '.items[0].url')
             artifact1=$(echo $artifacts | jq '.items[1].url')
+            artifact1=$(echo $artifacts | jq '.items[2].url')
             echo "export ARTIFACT0=$artifact0" >> $BASH_ENV
             echo "export ARTIFACT1=$artifact1" >> $BASH_ENV
+            echo "export ARTIFACT1=$artifact2" >> $BASH_ENV
       - slack/notify:
           event: always
           custom: |
@@ -66,6 +69,13 @@ jobs:
                   "text": {
                     "type": "mrkdwn",
                     "text": "Hyper-Tsumugu Artifacts <${ARTIFACT1}|package.json>"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Hyper-Tsumugu Artifacts <${ARTIFACT2}|tsumuguFace.cvg>"
                   }
                 }
               ]
