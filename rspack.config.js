@@ -1,8 +1,11 @@
-const path = require('path');
+const path = require("path");
 
-module.exports = {
+/** @type {import('@rspack/cli').Configuration} */
+const config = {
   mode: "production",
-  entry: "./src/index.ts",
+  entry: {
+    main: "./src/index.ts",
+  },
   output: {
     filename: "index.js",
     path: path.join(__dirname, ""),
@@ -15,12 +18,14 @@ module.exports = {
       {
         test: /\.(ts|js)$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        use: "babel-loader",
       },
       {
         test: /\.(gif|png|jpg|svg)$/,
-        loader: "url-loader",
+        use: "url-loader",
       },
     ],
   },
 };
+
+module.exports = config;
