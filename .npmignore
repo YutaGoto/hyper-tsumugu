@@ -1,8 +1,7 @@
 LICENSE
 src/
-webpack.config.js
+rspack.config.js
 node_modules/
 yarn-error.log
-.babelrc
 .editorconfig
 .gitignore
