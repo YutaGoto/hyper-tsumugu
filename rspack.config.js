@@ -16,13 +16,11 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.(ts|js)$/,
-        exclude: /node_modules/,
-        use: "babel-loader",
-      },
-      {
-        test: /\.(gif|png|jpg|svg)$/,
-        use: "url-loader",
+        test: /\.(png|jpg|svg)$/,
+        type: "asset/resource",
+        generator: {
+          filename: "tsumuguFace[ext]",
+        },
       },
     ],
   },
