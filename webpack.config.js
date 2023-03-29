@@ -1,28 +1,25 @@
 const path = require("path");
 
-/** @type {import('@rspack/cli').Configuration} */
 const config = {
   mode: "production",
-  entry: {
-    main: "./src/index.ts",
-  },
+  entry: "./src/index.ts",
   output: {
     filename: "index.js",
     path: path.join(__dirname, ""),
   },
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: [".ts"],
   },
   module: {
     rules: [
       {
-        test: /\.(ts|js)$/,
+        test: /\.(ts)$/,
         exclude: /node_modules/,
-        use: "babel-loader",
+        loader: "babel-loader",
       },
       {
         test: /\.(gif|png|jpg|svg)$/,
-        use: "url-loader",
+        loader: "url-loader",
       },
     ],
   },
