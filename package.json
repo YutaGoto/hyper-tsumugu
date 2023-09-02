@@ -13,7 +13,7 @@
   "repository": "https://github.com/yutagoto/hyper-tsumugu.git",
   "author": "yutagoto <you.goto.510@gmail.com>",
   "devDependencies": {
-    "@babel/core": "^7.22.10",
+    "@babel/core": "^7.22.11",
     "@babel/preset-env": "^7.22.10",
     "@babel/preset-typescript": "^7.22.5",
     "babel-loader": "^9.1.3",
