@@ -15,7 +15,7 @@ const config = {
       {
         test: /\.(ts)$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        loader: "swc-loader",
       },
       {
         test: /\.(gif|png|jpg|svg)$/,
