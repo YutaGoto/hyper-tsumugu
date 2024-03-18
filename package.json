@@ -13,7 +13,7 @@
   "repository": "https://github.com/yutagoto/hyper-tsumugu.git",
   "author": "yutagoto <you.goto.510@gmail.com>",
   "devDependencies": {
-    "@swc/core": "^1.4.0",
+    "@swc/core": "^1.4.8",
     "swc-loader": "^0.2.6",
     "typescript": "^5.4.2",
     "url-loader": "^4.1.1",
